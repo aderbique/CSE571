@@ -52,13 +52,19 @@ c) Can you design an environment in which your randomized agent will perform poo
 #### Figure 3.1c
 ![Custom designed environment for poor performance in randomized agent](media/figure_1.3c.png)
 
-### Exercise 1.4 (15pt)
+## Exercise 1.4 (15pt)
+### Prompt
 You are to design an agent that moves from a start location to a goal location with obstacles in between. Assuming that your agent knows about the start and goal locations and can sense its current location. However, it can only detect an obstacle when it is next to it (i.e., tactile sensing). A simple method that allows the agent to solve the problem is to follow the procedure:
 
-1) head toward goal
-2) follow the contour of anobstacle encountered (in a fixed direction) until you can head toward the goal again
-3) continue
+1) head toward goal  
+2) follow the contour of anobstacle encountered (in a fixed direction) until you can head toward the goal again  
+3) continue  
+![Map with obstacles](media/figure_1.4.png)
 
 
-a.) What is this type of agent? Can you specify the agent function? 
-b.) Can this agent always reach the goal location? If your answer is yes,explain your answer. Otherwise, justify your answerby giving an environment where it won't work.
+a.) What is this type of agent? Can you specify the agent function?  
+b.) Can this agent always reach the goal location? If your answer is yes,explain your answer. Otherwise, justify your answerby giving an environment where it won't work.  
+
+### Response
+
+###
