@@ -4,14 +4,14 @@
 
 # Exercises 
 
-## Exercise 1.1
+## Exercise 1.1 (5pt)
 ### Prompt
 Suppose that the performance measure is concerned with just the first T time steps of the environment and ignores everything thereafter. Show that a rational agent’s action may depend not just on the state of the environment but also on the time step it has reached. Assume that the agent has access to time. 
 
 ### Response
 If the performance measure is concerned with only the first `T` time steps of the environment and ignores everything after, then it can be shown a rational agent may act differently based upon what information is available to it in the environment. Simply put, the rational agent makes decisions based on what it knows, and performance is measured up until time `T`. After this, the agent may act differently, regardless of the state of the environment. In the case of the vacuum cleaner, once Time `T` is reached, there is a possibility the vacuum did not clean all the dirt and did not meet the performance goal. That is why a rational agent's action must include Time `T` in the performance measure.
 
-
+## Exercise 1.2 (15pt)
 ### Prompt
 For each of the following assertions, say whether it is true or false and support your answer with examples or counterexamples where appropriate. *Use our vacuum domain ONLY.*
 
@@ -22,7 +22,15 @@ d) Suppose an agent selects its action unformly at random from the set of possib
 e) Every agent is rational in an unobservable environment. 
 ### Response
 
-## Exercise 1.3
+|Case|True/False|Supporting Explanation|
+|----|----------|------------------|
+|A|False|Say the agent cannot sense where dirt is and the performance metric requires all dirt to be cleaned, then the vacuum cannot guarantee it is making the rational decision when moving to each tile.|
+|B|True| A relfex agent requires sensors and actuators to form its condition-action operations. If for example, there is not enough information available for a percept, then an irrational action can be made.|
+|C|True|A task environment consists of PEAS: Performance metric, environment, actuators, sensors. In a scenario where the performance metric is to either move or stay still, then all agents will be performing rationally.|
+|D|True|If chosen at random enough times, the agent will eventually choose an action that is rational.
+|E|False|In an unobservable environment, percepts cannot be determined, and therefore there is no way to know if the agent is reaching its performance metric.|
+
+## Exercise 1.3 (15pt)
 ### Prompt
 Consider a modified version of the vacuum environmentin which the geography of the environment—its extent, boundaries, and obstacles—is unknown, as is the initial dirt configuration. The agent can go Up and Down as well as Left and Right.The agent can sense its current location and whether there is dirt in it. *The performance metric is to clean the space.*
 ### Response
