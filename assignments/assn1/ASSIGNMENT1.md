@@ -18,11 +18,12 @@ If the performance measure is concerned with only the first `T` time steps of th
 ### Prompt
 For each of the following assertions, say whether it is true or false and support your answer with examples or counterexamples where appropriate. *Use our vacuum domain ONLY.*
 
-a) An agent that senses only partial information about the state cannot be perfectly rational.
-b) There exist task environments in which no pure reflex agent can behave rationally.
-c) There exists a task environment in which every agent is rational.
-d) Suppose an agent selects its action unformly at random from the set of possible actions. There exists a deterministic task evnironment in which this agent is rational.
-e) Every agent is rational in an unobservable environment. 
+a) An agent that senses only partial information about the state cannot be perfectly rational.  
+b) There exist task environments in which no pure reflex agent can behave rationally.  
+c) There exists a task environment in which every agent is rational.  
+d) Suppose an agent selects its action unformly at random from the set of possible actions. There exists a deterministic task evnironment in which this agent is rational.  
+e) Every agent is rational in an unobservable environment.   
+
 ### Response
 
 |Case|True/False|Supporting Explanation|
@@ -36,7 +37,12 @@ e) Every agent is rational in an unobservable environment.
 ## Exercise 1.3 (15pt)
 ### Prompt
 Consider a modified version of the vacuum environmentin which the geography of the environment—its extent, boundaries, and obstacles—is unknown, as is the initial dirt configuration. The agent can go Up and Down as well as Left and Right.The agent can sense its current location and whether there is dirt in it. *The performance metric is to clean the space.*
+
+a) Can a simple reflex agent be perfectly rational for this environment? Explain.  
+b) Can a simple reflex agent with a *randomized* agent function (i.e., the action may be a random choice from a set) outperform a simple reflex agent?  
+
 ### Response
+
 
 ### Exercise 1.4 (15pt)
 You are to design an agent that moves from a start location to a goal location with obstacles in between. Assuming that your agent knows about the start and goal locations and can sense its current location. However, it can only detect an obstacle when it is next to it (i.e., tactile sensing). A simple method that allows the agent to solve the problem is to follow the procedure:
