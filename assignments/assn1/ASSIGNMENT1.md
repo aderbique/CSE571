@@ -8,8 +8,8 @@
 ### Prompt
 Suppose that the performance measure is concerned with just the first T time steps of the environment and ignores everything thereafter. Show that a rational agent’s action may depend not just on the state of the environment but also on the time step it has reached. Assume that the agent has access to time. 
 
-
 ### Response
+If the performance measure is concerned with only the first `T` time steps of the environment and ignores everything after, then it can be shown a rational agent may act differently based upon what information is available to it in the environment. Simply put, the rational agent makes decisions based on what it knows, and performance is measured up until time `T`. After this, the agent may act differently, regardless of the state of the environment. In the case of the vacuum cleaner, once Time `T` is reached, there is a possibility the vacuum did not clean all the dirt and did not meet the performance goal. That is why a rational agent's action must include Time `T` in the performance measure.
 
 
 ### Prompt
