@@ -55,16 +55,25 @@ c) Can you design an environment in which your randomized agent will perform poo
 ## Exercise 1.4 (15pt)
 ### Prompt
 You are to design an agent that moves from a start location to a goal location with obstacles in between. Assuming that your agent knows about the start and goal locations and can sense its current location. However, it can only detect an obstacle when it is next to it (i.e., tactile sensing). A simple method that allows the agent to solve the problem is to follow the procedure:
+### Figure 1.4
+![Map with obstacles](media/figure_1.4.png)
 
 1) head toward goal  
 2) follow the contour of anobstacle encountered (in a fixed direction) until you can head toward the goal again  
 3) continue  
-![Map with obstacles](media/figure_1.4.png)
-
 
 a.) What is this type of agent? Can you specify the agent function?  
-b.) Can this agent always reach the goal location? If your answer is yes,explain your answer. Otherwise, justify your answerby giving an environment where it won't work.  
+b.) Can this agent always reach the goal location? If your answer is yes, explain your answer. Otherwise, justify your answerby giving an environment where it won't work.  
 
 ### Response
 
-###
+a.) This is a `Simple reflex agent`. The rationale behind this is that there are a predetermined set of actions for the agent to follow, depending on current location & sensor data. The agent function `F: P -> A` would be as follows:
+- Performance: Reach the goal location
+- Environment: locatiom
+- Actuators: left, right, up, down, no-op
+- Sensors: obstacle detection on adjacent square
+
+b.) No, this may not always be possible. In the event that there is no path to the goal location, the agent may never be able to meet its performance metric. In a real life example, the goal location for a vacuum could be another room, but unfortunately the door to that room is closed, leaving no path available for the vacuum to take. This is seen below in `Figure 1.4b`.
+
+### Figure 1.4b
+![Unwinnable goal location](media/figure_1.4b.png)
