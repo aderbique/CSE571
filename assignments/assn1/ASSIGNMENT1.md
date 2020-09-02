@@ -40,9 +40,17 @@ Consider a modified version of the vacuum environmentin which the geography of t
 
 a) Can a simple reflex agent be perfectly rational for this environment? Explain.  
 b) Can a simple reflex agent with a *randomized* agent function (i.e., the action may be a random choice from a set) outperform a simple reflex agent?  
+c) Can you design an environment in which your randomized agent will perform poorly, when movements are penalized?
 
 ### Response
+|Case|Yes/No|Supporting Explanation|
+|----|------|----------------------|
+|A|No|Although it would seem logical to think the agent would be rational for the environment because it can continue to clean forever (unlimited tiles), it will never be known if all the tiles have been cleaned as it does not have knowledge of size, boundaries, etc. Therefore, it will never know if it has achieved the maximum expected value of performance measure, making it not perfectly rational.|
+|B|Yes|After selecting enough random agent functions, the agent is bound to choose an agent function that outperforms a simple reflex agent. Although unlikely, it is possible. In a scenario where a simple reflex agent gets stuck on a wall, a random selecting agent may move, therefore getting unstuck and continuing on to a better performance metric.|
+|C|Yes|Having a large area of potentially dirty squares on either side of a long and narrow walkway with zero dirty squares would cause massive penalties to walk to the other side of the room to clean the entire area. See `Figure 1.3c`|
 
+#### Figure 3.1c
+![Custom designed environment for poor performance in randomized agent](media/figure_1.3c.png)
 
 ### Exercise 1.4 (15pt)
 You are to design an agent that moves from a start location to a goal location with obstacles in between. Assuming that your agent knows about the start and goal locations and can sense its current location. However, it can only detect an obstacle when it is next to it (i.e., tactile sensing). A simple method that allows the agent to solve the problem is to follow the procedure:
