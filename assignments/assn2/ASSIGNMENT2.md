@@ -56,7 +56,7 @@ I) Does *h* remain admissible if some links are added between nonadjacent states
 
 
 #### Figure 1.4.1 Varying levels of k
-[Figure_1.4.1](media/grid_expansion.jpg)
+![Figure_1.4.1](media/grid_expansion.jpg)
 
 ## Exercise 1.3 (15pt)
 ### Prompt
@@ -84,7 +84,7 @@ B) (4pt) Design at least two non-trivial admissble heuristics and explain.
 ### Figure 1.4
 
 A) Figure 1.4.1  
-[figure_1.4.1](media/search_problem.jpg)
+![figure_1.4.1](media/search_problem.jpg)
 
 ### Response
 We will assume the goat, wolf, and cabbage start on side A of the river and the goal state is to have all three on side B of the river. This problem can be solved in the following series of steps
