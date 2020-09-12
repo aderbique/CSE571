@@ -83,9 +83,6 @@ A) (7pt) Forumate this puzzle as a search problem.
 B) (4pt) Design at least two non-trivial admissble heuristics and explain.
 ### Figure 1.4
 
-A) Figure 1.4.1  
-![figure_1.4.1](media/search_problem.jpg)
-
 ### Response
 We will assume the goat, wolf, and cabbage start on side A of the river and the goal state is to have all three on side B of the river. This problem can be solved in the following series of steps
 1) Take the goat from side A to side B.  
@@ -96,7 +93,8 @@ We will assume the goat, wolf, and cabbage start on side A of the river and the 
 6) Travel back to side A.  
 7) Take the goat from side A to side B.  
 
-A)
+A) Figure 1.4.1
+![figure_1.4.1](media/search_problem.jpg)  
 
-B.1) The first state must be for the farmer to take the goat with him across the river. Taking either the wolf or the cabbage leads to failure. Taking nothing leads to a loop.  
-B.2)
+B.1) Heuristic = WG and GC have infinite weights and are not tolerated
+B.2) Heuristic = number of objects on side B - number of objects on side A
