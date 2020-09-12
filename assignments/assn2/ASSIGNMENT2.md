@@ -46,13 +46,13 @@ I) Does *h* remain admissible if some links are added between nonadjacent states
 |----|------|
 |A|**Branching Factor** is defined as being the maximum number of successors of any node. In this case, there are `five` possible child nodes. *(North, South, East, West, Stay),*. Therefore, `b=5`|
 |B|If k=1, there are 5 possible states. North, South, East, West or Stay. Although from k=0 to k=1, there is an increase in 4 states, this cannot continue because there cannot be any overlap. We must account for the growing edges as well as add the original state. Therefore, `F(k)=2k(k+1)+1`.|
-|C|Given a goal state at *(x,y)* and starting at *(0,0)*, we can iterate through levels of k=n, we can go +1 and -1, in the x and y axis, visting non-visited adjacent nodes as well.  We may not revisit previously explored nodes. In order to reach the goal. This can be described as 
-|D|
-|E|
-|F|
-|G|
-|H|
-|I|
+|C|Given a goal state at *(x,y)* and starting at *(0,0)*, we can iterate through levels of k=n, we can go +1 and -1, in the x and y axis, visting non-visited adjacent nodes as well.  We may not revisit previously explored nodes. In order to reach the goal. This can be described as `4^(x+y)`.|
+|D|The maximum number of distinct nodes expanded by breath-first search can be calulated to reach level k by adding up all distince states required to reach here. Therefore, D(k)=D(0) U D(k1) U ...D(k-1) U D(k). This leads to O(b*m), ultimately.|
+|E|In a breadh-first *graph* search, the maximum number of nodes expanded to the number of states available, which is 2k(k+1)+1.|
+|F|Yes, because the sum will always be a positive integer, and the agent can only move in x and y directions on the grid.|
+|G|Because A* is optimized to be best case, the number of expanded nodes is `x + y`.|
+|H|If some links are removed, the paths can be changed. In changing these paths, the heuristic is no longer admissible and cannot be guaranteed accurate. (It might now underestimate).|
+|I|If links are added, then the amount of paths available can only help the chances of finding a path of optimality. Therefore, the heuristic *h* remains admissible.|
 
 
 #### Figure 1.4.1 Varying levels of k
