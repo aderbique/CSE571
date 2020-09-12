@@ -16,6 +16,14 @@ B) Depth-first search is a special case of best-first search.
 C) Uniform-cost search is a special case of A* search.  
 
 ### Response
+In the textbook, **uniform-cost search** is defined to expand node *n* with the *lowest path cost g(n)*. This means that uniform-cost search expands nodes in order of their optimal path cost.
+
+|Case|True/False|Supporting Claim|
+|----|----------|----------------|
+|A|True|Breadth-first search always expands the *shallowest* unexpanded node, whereas in contrast uniform-cost search expands by *lowest path cost*. Although uniform-cost search is an improvement upon BFS because of only exploring nodes with lowest path cost, the results are effectively the same. Therefore, BFS is a special case of uniform-cost search and uniform-cost search is the generalization. |
+|B|False|**Depth-First Search** is considered an `uninformed search strategy`, wheres **Best-First Search** explores a graph by expanding the most promising node according to a specified rule. Source: [Wikipedia](https://en.wikipedia.org/wiki/Best-first_search)|
+|C|True|*Uniform-Cost Search* has a function `F(n) = g(n)`, and *A\** has a function `F(n) = g(n) + h(n). If all costs are the same, then UCS and A*S are identical.|
+
 
 ## Exercise 1.2 (18pt)
 ### Prompt
@@ -68,3 +76,7 @@ I) Does *h* remain admissible if some links are added between nonadjacent states
 
 
 ### Response
+
+### References
+
+
