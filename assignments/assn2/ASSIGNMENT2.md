@@ -75,7 +75,7 @@ D.3) *min{h1...hn}*
 |----|------|
 |A|The state space is a combination of all spaces on the field (n x n), with n cars that can be scattered anywhere throughout the grid. This can be depicted as `(n x n)! choose n!`|
 |B|Given the number of moves a car can make is 5, the branching factor at its worst case is `B(n)=5^n`.|
-|C|An admissible heuristic for this problem would be the manhattan distance algorithm. Plugging in (n-i+1) for p1, xi for q1, n for p2, and yi for q2 into `|p1-q1| + |p2-q2|` Source: [Wikipedia](https://en.wikipedia.org/wiki/Taxicab_geometry), We get `hi = | (n -1 + 1) - xi | + | n - yi |` which is an admissible heuristic. This gives us the exact cost to reach our destination.|
+|C|An admissible heuristic for this problem would be the manhattan distance algorithm. Plugging in (n-i+1) for p1, xi for q1, n for p2, and yi for q2 into `\|p1-q1\| + \|p2-q2\|` Source: [Wikipedia](https://en.wikipedia.org/wiki/Taxicab_geometry), We get `hi = \| (n -1 + 1) - xi \| + \| n - yi \|` which is an admissible heuristic. This gives us the exact cost to reach our destination.|
 |D i|No, This is proven with Dii. The summation of hi will be > than max(h1...hn), which leads to an inadmissible heuristic in the event that cars are hopping.|
 |D ii|No, In a perfectly terrible state, cars could be playing leap frog with each other. In other words, car hopping would lead to the cars traveling faster than the heuristic predicts.|
 |D iii|Yes, because if the car is at its desination already, then the cost is zero and the heuristic is admissible.|
