@@ -86,8 +86,8 @@ B) (4pt) Design at least two non-trivial admissble heuristics and explain.
 ### Response
 We will assume the goat, wolf, and cabbage start on side A of the river and the goal state is to have all three on side B of the river. This problem can be solved in the following series of steps
 1) Take the goat from side A to side B.  
-2) Travel back to side A.
-3) Take the cabbage from side A to side B.
+2) Travel back to side A.  
+3) Take the cabbage from side A to side B.  
 4) Take the goat from side B to side A.  
 5) Take the wolf from side A to side B.  
 6) Travel back to side A.  
@@ -96,5 +96,5 @@ We will assume the goat, wolf, and cabbage start on side A of the river and the 
 A) Figure 1.4.1
 ![figure_1.4.1](media/search_problem.jpg)  
 
-B.1) Heuristic = WG and GC have infinite weights and are not tolerated
-B.2) Heuristic = number of objects on side B - number of objects on side A
+B.1) Heuristic = WG and GC have infinite weights and are not tolerated. This is because the goal is never reached if the wolf eats the goat or the goat eats the cabbage.
+B.2) Heuristic = number of objects on side B - number of objects on side A. This will incentivize the goal state of getting everything to side B.
