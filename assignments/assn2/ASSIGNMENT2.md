@@ -60,7 +60,15 @@ I) Does *h* remain admissible if some links are added between nonadjacent states
 
 ## Exercise 1.3 (15pt)
 ### Prompt
+*n* vehicles occupy squares *(l,l)* through *(n,l)* (i.e., the bottom row) of an *n x n* grid. The vehicles must be moved to the top row but in reverse order; the vehicle *i* that starts in *(i,l)* must end up in *(n-i+1,n)*. On each time step, every one of the *n* vehicles can move one square up, down, lerft, or right, or stay put; but if a vehicle stays put, one other adjacent vehicle (but not more than one) can hop over it. Any vehicle is allowed to hop at most one other vehicle at a time. Two vehicles cannot occupy the same equare.
 
+A) (2pt) Calculate the size of the state space as a function of *n*.  
+B) (2pt) Calculate the branching factor as a function of *n*.  
+C) (2pt) Suppose that vehicle *i* is at *(xi, yi)*; write a **nontrivial** admissible heuristic *hi( for the number of moves it will require to get to its goal location *(n-i+1,n)*, **assuming no other vehicles are on the grid.**  
+D) (9pt) Which of the following heuristics are admissble for the problem of moving all *n* vehicles to their destinations? **Explain either way for each proposal below.**  
+D.1) Sigma(hi)  
+D.2) *max{h1...hn}*  
+D.3) *min{h1...hn}*  
 
 ### Response
 |Case|Yes/No|Supporting Explanation|
@@ -96,5 +104,5 @@ We will assume the goat, wolf, and cabbage start on side A of the river and the 
 A) Figure 1.4.1
 ![figure_1.4.1](media/search_problem.jpg)  
 
-B.1) Heuristic = WG and GC have infinite weights and are not tolerated. This is because the goal is never reached if the wolf eats the goat or the goat eats the cabbage.
+B.1) Heuristic = WG and GC have infinite weights and are not tolerated. This is because the goal is never reached if the wolf eats the goat or the goat eats the cabbage.  
 B.2) Heuristic = number of objects on side B - number of objects on side A. This will incentivize the goal state of getting everything to side B.
