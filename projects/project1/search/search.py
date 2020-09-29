@@ -73,7 +73,12 @@ def tinyMazeSearch(problem):
     return  [s, s, w, s, w, w, s, w]
 
 def depthFirstSearch(problem):
-    """ Search the deepest nodes in the search tree first. """
+    """ 
+    Search the deepest nodes in the search tree first. 
+
+    ANS Problem 1: Exploration is what I expected. Pacman does not explore all nodes; it finds the first path to the deepest node. This is a least cost solution.
+    
+    """
     nv = []                                             # Initialize empty array for visited nodes
     s = util.Stack()                                    # Initialize LIFO stack for fringe
     s.push((problem.getStartState(), ()))               # Add initial location to stack
@@ -93,7 +98,10 @@ def depthFirstSearch(problem):
     util.raiseNotDefined()                              # If no solution is found, throw an error
 
 def breadthFirstSearch(problem):
-    """Search the shallowest nodes in the search tree first."""
+    """
+    Search the shallowest nodes in the search tree first.
+    
+    ANS Problem 2: BFS provides least cost solution."""
     nv = []                                             # Initialize empty array for visited nodes
     s = util.Queue()                                    # Initialize queue for fringe
     s.push((problem.getStartState(), ()))               # Add initial location to stack
@@ -143,7 +151,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     """
     Search the node that has the lowest combined cost and heuristic first.
 
-    For an open maze, A* search is optimal.
+    ANS Problem 4: For an open maze, A* search is optimal. It moves to the goal state in leasst moves possible.
     
     """
     nv = []                                             # Initialize empty array for visited nodes
