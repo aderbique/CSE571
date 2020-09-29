@@ -94,9 +94,8 @@ def depthFirstSearch(problem):
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
     nv = []                                             # Initialize empty array for visited nodes
-    s = util.Queue()                                    # Initialize LIFO stack for fringe
+    s = util.Queue()                                    # Initialize queue for fringe
     s.push((problem.getStartState(), ()))               # Add initial location to stack
     while not s.isEmpty():                              # Loop until stack is empty
         cn = s.pop()                                    # Current node in search state
@@ -112,12 +111,26 @@ def breadthFirstSearch(problem):
                 if not path[0] in nv:                   # if the new node isn't already visited
                   s.push(nn)                            # Push new node to stack
     util.raiseNotDefined()                              # If no solution is found, throw an error
-    util.raiseNotDefined()
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    nv = []                                             # Initialize empty array for visited nodes
+    s = util.PriorityQueue()                            # Initialize priority queue for fringe
+    s.push((problem.getStartState(), ()), 0)            # Add initial location to stack with cost of 0
+    while not s.isEmpty():                              # Loop until stack is empty
+        cn = s.pop()                                    # Current node in search state
+        cs, cp = cn[0], cn[1]                           # current state, current plan
+        if problem.isGoalState(cs):                     # checks if current state is goal state
+            return list(cp)                             # returns plan if true
+        if not cs in nv:                                # Executes only if pacman hasn't already been to this state before
+            nv.append(cs)                               # Adds node to list of visited nodes
+            for path in problem.getSuccessors(cs):      # all paths known for current state
+                np = list(cp)                           # grab new plan from current plan
+                np.append(path[1])                      # add path to the new plan
+                nn = (path[0], tuple(np))               # new node is the child 
+                if not path[0] in nv:                   # if the new node isn't already visited
+                  s.push(nn, problem.getCostOfActions(np))# Push new node to stack with associated cost
+    util.raiseNotDefined()                              # If no solution is found, throw an error
 
 def nullHeuristic(state, problem=None):
     """
@@ -127,10 +140,29 @@ def nullHeuristic(state, problem=None):
     return 0
 
 def aStarSearch(problem, heuristic=nullHeuristic):
-    """Search the node that has the lowest combined cost and heuristic first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    """
+    Search the node that has the lowest combined cost and heuristic first.
 
+    For an open maze, A* search is optimal.
+    
+    """
+    nv = []                                             # Initialize empty array for visited nodes
+    s = util.PriorityQueue()                            # Initialize priority queue for fringe
+    s.push((problem.getStartState(), ()), 0)            # Add initial location to stack with cost of 0
+    while not s.isEmpty():                              # Loop until stack is empty
+        cn = s.pop()                                    # Current node in search state
+        cs, cp = cn[0], cn[1]                           # current state, current plan
+        if problem.isGoalState(cs):                     # checks if current state is goal state
+            return list(cp)                             # returns plan if true
+        if not cs in nv:                                # Executes only if pacman hasn't already been to this state before
+            nv.append(cs)                               # Adds node to list of visited nodes
+            for path in problem.getSuccessors(cs):      # all paths known for current state
+                np = list(cp)                           # grab new plan from current plan
+                np.append(path[1])                      # add path to the new plan
+                nn = (path[0], tuple(np))               # new node is the child 
+                if not path[0] in nv:                   # if the new node isn't already visited
+                  s.push(nn, problem.getCostOfActions(np) + (heuristic(path[0], problem)))# Push new node to stack with associated cost
+    util.raiseNotDefined()                              # If no solution is found, throw an error
 
 # Abbreviations
 bfs = breadthFirstSearch
