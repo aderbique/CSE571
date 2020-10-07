@@ -11,6 +11,8 @@ The following text shall not be used for the purposes of academic dishonesty. It
 ### Prompt
 Given the following minimax tree discussed in class, answer the following questions about alpha-beta pruning, **and explain your answers** by providing alpha-beta values for `a` and `b` below. *Except for the root node, the labels for the edges can be used as labels for the corresponding child nodes.*
 
+![Figure_1](media/minimax_tree.png)
+
 1. (3pt) Assuming we always explore from lef to right, can the leaf nodes at `j` and `k` be pruned when the ordering of the leaf nodes can be aribtrarily changed (similar to what you see in the exercised in our offline lecure)? If so, provide an ordering of the lead nodes. Otherwise, explain why.
 2. (3pt) Given a, think about the optimal ordering of the leaf nodes (assuming the same structure) for alpha-beta pruning in this tree? What are the nodes that will be pruned?
 3. (3pt) Observing `a` and `b` above, provide an intuitive answer to why alpha-beta pruning takes time O(2^(m/2)) with optimal ordering, where `m` is the maximum depth of the game tree.
@@ -23,6 +25,8 @@ Given the following minimax tree discussed in class, answer the following questi
 ## Exercise 1.2 (9pt)
 ### Prompt
 On the minimax game tree below, answer the following questions about alpha-beta pruning assumning left to right traversal, **and explain your answers.**
+
+![Figure_2](media/minimax_tree_blanks.PNG)
 
 1. (3pt) What are the values of `A`, `B`, and `C` that ensure that `X1` and its leaf nodes will **not** be pruned?
 2. (3pt) For the node `n1` to be pruned, what is the requirement on the variables `A`, `B`, and `C`?
