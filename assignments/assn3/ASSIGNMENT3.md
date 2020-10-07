@@ -18,8 +18,8 @@ Given the following minimax tree discussed in class, answer the following questi
 3. (3pt) Observing `a` and `b` above, provide an intuitive answer to why alpha-beta pruning takes time O(2^(m/2)) with optimal ordering, where `m` is the maximum depth of the game tree.
 
 ### Response
-1. Yes, this is entirely possible. By moving leaf node `j` to the very right, and rearranging the positions of `n` and `m`, we can prune both j and k. An example structure would be `C-D-F-G-M-K-N-J`.
-2. In an optimal ordering, we must maximime the number of occurrences of (alpha > beta). This creates pruning oppurtunities.  Applying this technique, we can achieve four values pruned. An example structure would be `J-M-F-D-C-N-G-K`.
+1. Yes, this is entirely possible. By moving leaf node `j` to the very right, and rearranging the positions of `n` and `m`, we can prune both j and k. An example structure would be `C-D-F-G-M-K-N-J`. In case the prompt is asking for the values to change and not the leaf node labels, the answer would be `10-6-100-8-20-2-4-1`.
+2. In an optimal ordering, we must maximime the number of occurrences of (alpha > beta). This creates pruning oppurtunities.  Applying this technique, we can achieve four values pruned. An example structure would be `J-M-F-D-C-N-G-K`. In case the prompt is asking for the values to change and not the leaf node labels, the answer would be `1-20-100-6-10-4-8-2`.
 3. Alpha-Beta pruning is capable of O(2^(m/2)) time complexity with optimal ordering by reducing the number of subbranches it needs to calculate.  The effective branching factor is reduced to the square root of branch m, otherwise known as O(2^(m/2)).
 
 ## Exercise 1.2 (9pt)
