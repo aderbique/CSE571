@@ -152,6 +152,7 @@ def axiom_generator_percept_sentence(t, tvec):
         Input:  [False, True, False, False, True]
         Output: '~Stench0 & Breeze0 & ~Glitter0 & ~Bump0 & Scream0'
     """
+    "*** YOUR CODE HERE ***"
     percept = ["Stench","Breeze","Glitter","Bump","Scream"]
     axiom_str = ''
     for i in range(len(percept)):
@@ -160,7 +161,6 @@ def axiom_generator_percept_sentence(t, tvec):
     percept = [s + str(t) for s in percept]
     axiom_str = ' & '.join(percept)
 
-    "*** YOUR CODE HERE ***"
     # Comment or delete the next line once this function has been implemented.
     #utils.print_not_implemented()
     return axiom_str
@@ -176,8 +176,8 @@ def axiom_generator_initial_location_assertions(x, y):
 
     x,y := the location
     """
-    axiom_str = '~' + pit_str(x,y) + " & ~" + wumpus_str(x,y)
     "*** YOUR CODE HERE ***"
+    axiom_str = '~' + pit_str(x,y) + " & ~" + wumpus_str(x,y)
     # Comment or delete the next line once this function has been implemented.
     #utils.print_not_implemented()
     return axiom_str
@@ -192,13 +192,13 @@ def axiom_generator_pits_and_breezes(x, y, xmin, xmax, ymin, ymax):
            variables to 'prune' any neighboring locations that are outside
            of the environment (and therefore are walls, so can't have Pits).
     """
+    "*** YOUR CODE HERE ***"
     axiom_str = breeze_str(x,y) + ' <=> ('
     pit_arr = []
     for (i,j) in [(x-1, y), (x+1,y), (x,y), (x,y-1), (x,y+1)]:
         if i >= xmin and i <= xmax and j >= ymin and j <= ymax:
             pit_arr.append(pit_str(i,j))
     axiom_str += ' | '.join(pit_arr) + ')'
-    #"*** YOUR CODE HERE ***"
     return axiom_str
 
 def generate_pit_and_breeze_axioms(xmin, xmax, ymin, ymax):
@@ -223,14 +223,13 @@ def axiom_generator_wumpus_and_stench(x, y, xmin, xmax, ymin, ymax):
            variables to 'prune' any neighboring locations that are outside
            of the environment (and therefore are walls, so can't have Wumpi).
     """
-    axiom_str = wumpus_str(x,y) + ' <=> ('
+    "*** YOUR CODE HERE ***"
+    axiom_str = stench_str(x,y) + ' <=> ('
     wumpi_arr = []
     for (i,j) in [(x-1, y), (x+1,y), (x,y), (x,y-1), (x,y+1)]:
         if i >= xmin and i <= xmax and j >= ymin and j <= ymax:
-            wumpi_arr.append(pit_str(i,j))
+            wumpi_arr.append(wumpus_str(i,j))
     axiom_str += ' | '.join(wumpi_arr) + ')'
-    #"*** YOUR CODE HERE ***"
-    "*** YOUR CODE HERE ***"
     return axiom_str
 
 def generate_wumpus_and_stench_axioms(xmin, xmax, ymin, ymax):
@@ -248,13 +247,13 @@ def axiom_generator_at_least_one_wumpus(xmin, xmax, ymin, ymax):
 
     xmin, xmax, ymin, ymax := the bounds of the environment.
     """
+    "*** YOUR CODE HERE ***"
     axiom_str = ''
     wumpi_arr = []
     for i in range(xmin, xmax + 1):
         for j in range(ymin, ymax + 1):
             wumpi_arr.append(wumpus_str(i,j))
     axiom_str += ' | '.join(wumpi_arr)
-    "*** YOUR CODE HERE ***"
     # Comment or delete the next line once this function has been implemented.
     #utils.print_not_implemented()
     return axiom_str
@@ -265,8 +264,18 @@ def axiom_generator_at_most_one_wumpus(xmin, xmax, ymin, ymax):
 
     xmin, xmax, ymin, ymax := the bounds of the environment.
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = ''
+    pairs_arr = []
+    for x1 in range(xmin, xmax + 1):
+        for y1 in range(ymin, ymax + 1):
+            for x2 in range(xmin, xmax + 1):
+                for y2 in range(ymin, ymax + 1):
+                    if not (x1 == x2 and y1 == y2):
+                        pairs_arr.append('( ~' + wumpus_str(x1,y1) + ' | ~' + wumpus_str(x2,y2) + ')')
+                    else:
+                        pass
+    axiom_str = '(' + ' & '.join(pairs_arr) + ')'
     # Comment or delete the next line once this function has been implemented.
     #utils.print_not_implemented()
     return axiom_str
@@ -279,10 +288,18 @@ def axiom_generator_only_in_one_location(xi, yi, xmin, xmax, ymin, ymax, t = 0):
     xmin, xmax, ymin, ymax := the bounds of the environment.
     t := time; default=0
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = ''
+    loc_arr = []
+    for i in range(xmin, xmax + 1):
+        for j in range(ymin, ymax + 1):
+            if (i == xi and j == yi):
+                loc_arr.append(state_loc_str(i,j,t))
+            else:
+                loc_arr.append('~' + state_loc_str(i,j,t))
+    axiom_str += ' & '.join(loc_arr)
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def axiom_generator_only_one_heading(heading = 'north', t = 0):
@@ -293,10 +310,18 @@ def axiom_generator_only_one_heading(heading = 'north', t = 0):
                will be one of: 'north', 'east', 'south', 'west'
     t := time; default=0
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = ''
+    headings = [state_heading_north_str(t),state_heading_south_str(t),state_heading_east_str(t),state_heading_west_str(t)]
+    axiom_arr = []
+    for h in headings:
+        if h.upper() == ('Heading' + heading + str(t)).upper():
+            axiom_arr.append(h)
+        else:
+            axiom_arr.append('~' + h)
+    axiom_str = ' & '.join(axiom_arr)
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def axiom_generator_have_arrow_and_wumpus_alive(t = 0):
@@ -305,10 +330,10 @@ def axiom_generator_have_arrow_and_wumpus_alive(t = 0):
 
     t := time; default=0
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_have_arrow_str(t) + ' & ' + state_wumpus_alive_str(t)
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 
@@ -347,8 +372,8 @@ def axiom_generator_location_OK(x, y, t):
     x,y := location
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_OK_str(x,y,t) + ' <=> ( ~' + pit_str(x,y) + ' & ( ~' + wumpus_str(x,y) + ' | ( ~' + state_wumpus_alive_str(t) + ' & ' + wumpus_str(x,y) + ')))'
     return axiom_str
 
 def generate_square_OK_axioms(t, xmin, xmax, ymin, ymax):
@@ -372,8 +397,8 @@ def axiom_generator_breeze_percept_and_location_property(x, y, t):
     x,y := location
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = '(' + state_loc_str(x,y,t) + ') >> (' + percept_breeze_str(t) + ' <=> ' + breeze_str(x,y) + ')'
     return axiom_str
 
 def generate_breeze_percept_and_location_axioms(t, xmin, xmax, ymin, ymax):
@@ -393,8 +418,8 @@ def axiom_generator_stench_percept_and_location_property(x, y, t):
     x,y := location
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = '(' + state_loc_str(x,y,t) + ') >> (' + percept_stench_str(t) + ' <=> ' + stench_str(x,y) + ')'
     return axiom_str
 
 def generate_stench_percept_and_location_axioms(t, xmin, xmax, ymin, ymax):
@@ -430,9 +455,16 @@ def axiom_generator_at_location_ssa(t, x, y, xmin, xmax, ymin, ymax):
     x,y := location
     t := time
     xmin, xmax, ymin, ymax := the bounds of the environment.
-    """
-    axiom_str = ''
+    """ 
     "*** YOUR CODE HERE ***"
+    axiom_arr = []
+    axiom_str = state_loc_str(x,y,t+1) + ' <=> (('
+    if (x-1 >= xmin and x-1 <= xmax) and (y >= ymin and y <= ymax): axiom_arr.append(state_loc_str(x-1,y,t))
+    if (x+1 >= xmin and x+1 <= xmax) and (y >= ymin and y <= ymax): axiom_arr.append(state_loc_str(x+1,y,t))
+    if (x >= xmin and x <= xmax) and (y-1 >= ymin and y-1 <= ymax): axiom_arr.append(state_loc_str(x,y-1,t))
+    if (x >= xmin and x <= xmax) and (y+1 >= ymin and y+1 <= ymax): axiom_arr.append(state_loc_str(x,y+1,t))
+    axiom_str += '(' + ' | '.join(axiom_arr) + ') & ' + action_forward_str(t)
+    axiom_str += ') | (' + state_loc_str(x,y,t) + ' & ~' + action_forward_str(t) + '))'
     return axiom_str
 
 def generate_at_location_ssa(t, x, y, xmin, xmax, ymin, ymax, heading):
@@ -469,10 +501,10 @@ def axiom_generator_have_arrow_ssa(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_have_arrow_str(t+1) +  ' <=> (' + state_have_arrow_str(t) + ' & ~' + action_shoot_str(t) + ')'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def axiom_generator_wumpus_alive_ssa(t):
@@ -486,10 +518,10 @@ def axiom_generator_wumpus_alive_ssa(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_wumpus_alive_str(t+1) +  ' <=> (' + state_wumpus_alive_str(t) + ' & ~' + percept_scream_str(t + 1) + ')'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 #----------------------------------
@@ -502,10 +534,14 @@ def axiom_generator_heading_north_ssa(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_heading_north_str(t+1) + ' <=> (('
+    axiom_str += state_heading_north_str(t) + ' & '
+    axiom_str += '~' + action_turn_left_str(t) + ' & ~' + action_turn_right_str(t) + ') | ('
+    axiom_str += state_heading_west_str(t) + ' & ' + action_turn_right_str(t) + ') | ('
+    axiom_str += state_heading_east_str(t) + ' & ' + action_turn_left_str(t) + '))'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def axiom_generator_heading_east_ssa(t):
@@ -515,10 +551,14 @@ def axiom_generator_heading_east_ssa(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_heading_east_str(t+1) + ' <=> (('
+    axiom_str += state_heading_east_str(t) + ' & '
+    axiom_str += '~' + action_turn_left_str(t) + ' & ~' + action_turn_right_str(t) + ') | ('
+    axiom_str += state_heading_north_str(t) + ' & ' + action_turn_right_str(t) + ') | ('
+    axiom_str += state_heading_south_str(t) + ' & ' + action_turn_left_str(t) + '))'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def axiom_generator_heading_south_ssa(t):
@@ -528,10 +568,14 @@ def axiom_generator_heading_south_ssa(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_heading_south_str(t+1) + ' <=> (('
+    axiom_str += state_heading_south_str(t) + ' & '
+    axiom_str += '~' + action_turn_left_str(t) + ' & ~' + action_turn_right_str(t) + ') | ('
+    axiom_str += state_heading_east_str(t) + ' & ' + action_turn_right_str(t) + ') | ('
+    axiom_str += state_heading_west_str(t) + ' & ' + action_turn_left_str(t) + '))'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def axiom_generator_heading_west_ssa(t):
@@ -541,10 +585,14 @@ def axiom_generator_heading_west_ssa(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_heading_west_str(t+1) + ' <=> (('
+    axiom_str += state_heading_west_str(t) + ' & '
+    axiom_str += '~' + action_turn_left_str(t) + ' & ~' + action_turn_right_str(t) + ') | ('
+    axiom_str += state_heading_south_str(t) + ' & ' + action_turn_right_str(t) + ') | ('
+    axiom_str += state_heading_north_str(t) + ' & ' + action_turn_left_str(t) + '))'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def generate_heading_ssa(t):
@@ -575,10 +623,10 @@ def axiom_generator_heading_only_north(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_heading_north_str(t) + ' <=> ( ~' + state_heading_west_str(t) + ' & ~' + state_heading_south_str(t) + ' & ~' + state_heading_east_str(t) + ')'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def axiom_generator_heading_only_east(t):
@@ -588,10 +636,10 @@ def axiom_generator_heading_only_east(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_heading_east_str(t) + ' <=> ( ~' + state_heading_north_str(t) + ' & ~' + state_heading_south_str(t) + ' & ~' + state_heading_west_str(t) + ')'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def axiom_generator_heading_only_south(t):
@@ -601,10 +649,10 @@ def axiom_generator_heading_only_south(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_heading_south_str(t) + ' <=> ( ~' + state_heading_north_str(t) + ' & ~' + state_heading_west_str(t) + ' & ~' + state_heading_east_str(t) + ')'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def axiom_generator_heading_only_west(t):
@@ -614,10 +662,10 @@ def axiom_generator_heading_only_west(t):
 
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = state_heading_west_str(t) + ' <=> ( ~' + state_heading_north_str(t) + ' & ~' + state_heading_south_str(t) + ' & ~' + state_heading_east_str(t) + ')'
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 def generate_heading_only_one_direction_axioms(t):
@@ -633,10 +681,23 @@ def axiom_generator_only_one_action_axioms(t):
     
     t := time
     """
-    axiom_str = ''
     "*** YOUR CODE HERE ***"
+    axiom_str = ''
+    axioms_arr = []
+    for action1 in proposition_bases_actions:
+        action_arr = []
+        action_str = '(' + action1 + str(t) + ' <=> ('
+        for action2 in proposition_bases_actions:
+            if action1 == action2:
+                pass
+            else:
+                action_arr.append('~' + action2 + str(t))
+        action_str += ' & '.join(action_arr) + '))'
+        axioms_arr.append(action_str)
+    axiom_str = ' & '.join(axioms_arr)
+
     # Comment or delete the next line once this function has been implemented.
-    utils.print_not_implemented()
+    #utils.print_not_implemented()
     return axiom_str
 
 

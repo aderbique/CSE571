@@ -126,30 +126,79 @@ class PlanRouteProblem(search.Problem):
         Heuristic that will be used by search.astar_search()
         """
         "*** YOUR CODE HERE ***"
-        pass
+        dist_arr = []
+        for goal in self.goals:
+            dist_arr.append(manhattan_distance_with_heading(node.state, goal))
+        return min(dist_arr)
 
     def actions(self, state):
         """
         Return list of allowed actions that can be made in state
         """
         "*** YOUR CODE HERE ***"
-        pass
+        if state[2] == 0:
+            state_fw = (state[0], state[1] + 1, 0)
+            state_tr = (state[0], state[1], 3)
+            state_tl = (state[0], state[1], 1)
+        elif state[2] == 1:
+            state_fw = (state[0] - 1, state[1], 1)
+            state_tr = (state[0], state[1], 0)
+            state_tl = (state[0], state[1], 2)
+        elif state[2] == 2:
+            state_fw = (state[0], state[1] - 1, 2)
+            state_tr = (state[0], state[1], 1)
+            state_tl = (state[0], state[1], 3)
+        elif state[2] == 3:
+            state_fw = (state[0] + 1, state[1], 3)
+            state_tr = (state[0], state[1], 2)
+            state_tl = (state[0], state[1], 0)
+        else:
+            raise Exception("This shouldn't be happening. Can't find heading")
+        dist_fw_arr, dist_tr_arr, dist_tl_arr = ([9999999] for i in range(3)) 
+        for goal in self.goals:
+            if (state_fw[0],state_fw[1]) in self.allowed:
+                dist_fw_arr.append(manhattan_distance_with_heading(state_fw, goal))
+            dist_tr_arr.append(manhattan_distance_with_heading(state_tr, goal))
+            dist_tl_arr.append(manhattan_distance_with_heading(state_tl, goal))
 
-
+        if (min(dist_fw_arr) <= min(min(dist_tr_arr),min(dist_tl_arr))) and (state_fw[0],state_fw[1]) in self.allowed: return ['Forward']
+        if min(dist_tr_arr) <= min(min(dist_fw_arr),min(dist_tl_arr)): return ['TurnRight']
+        if min(dist_tl_arr) <= min(min(dist_tr_arr),min(dist_tr_arr)): return ['TurnLeft']
+        raise Exception("This shouldn't be happening. Can't determine action")
+        
     def result(self, state, action):
         """
         Return the new state after applying action to state
         """
         "*** YOUR CODE HERE ***"
-        pass
-
+        new_x, new_y, new_heading = state
+        if action == 'Forward':
+            if state[2] == 0: new_y = state[1] + 1 #Forward North
+            if state[2] == 1: new_x = state[0] - 1 #Forward West
+            if state[2] == 2: new_y = state[1] - 1 #Forward South
+            if state[2] == 3: new_x = state[0] + 1 #Forward East 
+        elif action == 'TurnLeft':
+            if state[2] == 0: new_heading = 1 #Turn left to face West
+            if state[2] == 1: new_heading = 2 #Turn left to face South 
+            if state[2] == 2: new_heading = 3 #Turn left to face East
+            if state[2] == 3: new_heading = 0 #Turn left to face North
+        elif action == 'TurnRight':
+            if state[2] == 0: new_heading = 3 #Turn to face East
+            if state[2] == 1: new_heading = 0 #Turn to face South
+            if state[2] == 2: new_heading = 1 #Turn to face West
+            if state[2] == 3: new_heading = 2 #Turn to face North
+        new_state = (new_x,new_y,new_heading)
+        return new_state
+        
     def goal_test(self, state):
         """
         Return True if state is a goal state
         """
         "*** YOUR CODE HERE ***"
-        return True
-
+        if (state[0], state[1]) in self.goals: #Check to see if at goal state
+            return True
+        else:
+            return False
 #-------------------------------------------------------------------------------
 
 def test_PRP(initial):
@@ -224,35 +273,102 @@ class PlanShotProblem(search.Problem):
         allowed = list of state (x,y) tuples that agent could move to """
         self.initial = initial # initial state
         self.goals = goals     # list of goals that can be achieved
-        self.allowed = allowed # the states we can move into
+        self.allowed = allowed  # the states we can move into  
 
     def h(self,node):
         """
         Heuristic that will be used by search.astar_search()
         """
         "*** YOUR CODE HERE ***"
-        pass
+        dist_arr = []                                                           #Initialize Array
+        for goal in self.goals:                                                 # Iterate through Goals
+            dist_arr.append(manhattan_distance_with_heading(node.state, goal))  # Add distance between node and goal
+        return min(dist_arr)                                                    # Return minimum
 
     def actions(self, state):
         """
         Return list of allowed actions that can be made in state
         """
         "*** YOUR CODE HERE ***"
-        pass
+        if state[2] == 0:   # When agent is facing North
+            state_fw = (state[0], state[1] + 1, 0)
+            state_tr = (state[0], state[1], 3)
+            state_tl = (state[0], state[1], 1)
+        elif state[2] == 1: # When agent is facing West
+            state_fw = (state[0] - 1, state[1], 1)
+            state_tr = (state[0], state[1], 0)
+            state_tl = (state[0], state[1], 2)
+        elif state[2] == 2: # When agent is facing South
+            state_fw = (state[0], state[1] - 1, 2)
+            state_tr = (state[0], state[1], 1)
+            state_tl = (state[0], state[1], 3)
+        elif state[2] == 3: # When agent is facing East
+            state_fw = (state[0] + 1, state[1], 3)
+            state_tr = (state[0], state[1], 2)
+            state_tl = (state[0], state[1], 0)
+        else:
+            raise Exception("This shouldn't be happening. Can't find heading")
+        
+        shoot_loc_arr = []  # Initialize Array
+        for allowed_state in self.allowed:  # Iterate through all allowed states
+            for goal_state in self.goals:   # Iterate through all goal states
+                if allowed_state[0] == goal_state[0] and allowed_state[1] <  goal_state[1]: shoot_loc_arr.append((allowed_state[0], allowed_state[1], 0)) # X Matches, Head North
+                if allowed_state[0] >  goal_state[0] and allowed_state[1] == goal_state[1]: shoot_loc_arr.append((allowed_state[0], allowed_state[1], 1)) # Y Matches, Head West
+                if allowed_state[0] == goal_state[0] and allowed_state[1] >  goal_state[1]: shoot_loc_arr.append((allowed_state[0], allowed_state[1], 2)) # X Matches, Head South
+                if allowed_state[0] <  goal_state[0] and allowed_state[1] == goal_state[1]: shoot_loc_arr.append((allowed_state[0], allowed_state[1], 3)) # Y Matches, Head East        
 
+        dist_fw_arr, dist_tr_arr, dist_tl_arr = ([9999999] for i in range(3)) # Initialize to large values
+        for goal in shoot_loc_arr:  # Iterate through arrays
+            if (state_fw[0],state_fw[1]) in self.allowed:
+                dist_fw_arr.append(manhattan_distance_with_heading(state_fw, goal))
+            dist_tr_arr.append(manhattan_distance_with_heading(state_tr, goal))
+            dist_tl_arr.append(manhattan_distance_with_heading(state_tl, goal))
+
+        if (min(dist_fw_arr) <= min(min(dist_tr_arr),min(dist_tl_arr))) and (state_fw[0],state_fw[1]) in self.allowed: return ['Forward']
+        if min(dist_tr_arr) <= min(min(dist_fw_arr),min(dist_tl_arr)): return ['TurnRight']
+        if min(dist_tl_arr) <= min(min(dist_tr_arr),min(dist_tr_arr)): return ['TurnLeft']
+        raise Exception("This shouldn't be happening. Can't determine action")
+  
     def result(self, state, action):
         """
         Return the new state after applying action to state
         """
         "*** YOUR CODE HERE ***"
-        pass
+        new_x, new_y, new_heading = state
+        if action == 'Forward':
+            if state[2] == 0: new_y = state[1] + 1 #Forward North
+            if state[2] == 1: new_x = state[0] - 1 #Forward West
+            if state[2] == 2: new_y = state[1] - 1 #Forward South
+            if state[2] == 3: new_x = state[0] + 1 #Forward East 
+        elif action == 'TurnLeft':
+            if state[2] == 0: new_heading = 1 #Turn left to face West
+            if state[2] == 1: new_heading = 2 #Turn left to face South 
+            if state[2] == 2: new_heading = 3 #Turn left to face East
+            if state[2] == 3: new_heading = 0 #Turn left to face North
+        elif action == 'TurnRight':
+            if state[2] == 0: new_heading = 3 #Turn to face East
+            if state[2] == 1: new_heading = 0 #Turn to face South
+            if state[2] == 2: new_heading = 1 #Turn to face West
+            if state[2] == 3: new_heading = 2 #Turn to face North
+        new_state = (new_x,new_y,new_heading)
+        return new_state
 
     def goal_test(self, state):
         """
         Return True if state is a goal state
         """
         "*** YOUR CODE HERE ***"
-        return True
+        shoot_loc_arr = []
+        for allowed_state in self.allowed:
+            for goal_state in self.goals:
+                if allowed_state[0] == goal_state[0] and allowed_state[1] <  goal_state[1]: shoot_loc_arr.append((allowed_state[0], allowed_state[1], 0)) # Head North
+                if allowed_state[0] >  goal_state[0] and allowed_state[1] == goal_state[1]: shoot_loc_arr.append((allowed_state[0], allowed_state[1], 1)) # Head West
+                if allowed_state[0] == goal_state[0] and allowed_state[1] >  goal_state[1]: shoot_loc_arr.append((allowed_state[0], allowed_state[1], 2)) # Head South
+                if allowed_state[0] <  goal_state[0] and allowed_state[1] == goal_state[1]: shoot_loc_arr.append((allowed_state[0], allowed_state[1], 3)) # Head East
+        if state in shoot_loc_arr:
+            return True
+        else:
+            return False        
 
 #-------------------------------------------------------------------------------
 
