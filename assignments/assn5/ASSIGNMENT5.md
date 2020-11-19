@@ -31,7 +31,7 @@ D. r = +3
 
 ## Exercise 1.3 (8pt)
 ### Prompt
-Consider the 101 x 3 world shown below. In the start state the agent has a choice of two deterministic actions, Up or Down, but in the other states the agent has one deterministic action, Right. Assuming a discounted reward function, for what values of the discount `v` should the agent choose Up and for which Down? Compute the utility of each action as a function of `v`. (Note that this simple example actually reflects many real-world situations in which one must weight the value of an immediate action versus the potential continual long-termin consequences, such as choosing to dump pollutants into a lake.)
+Consider the 101 x 3 world shown below. In the start state the agent has a choice of two deterministic actions, Up or Down, but in the other states the agent has one deterministic action, Right. Assuming a discounted reward function, for what values of the discount γ should the agent choose Up and for which Down? Compute the utility of each action as a function of γ. (Note that this simple example actually reflects many real-world situations in which one must weight the value of an immediate action versus the potential continual long-termin consequences, such as choosing to dump pollutants into a lake.)
 
 <Inser fiogure here>
 
@@ -39,7 +39,7 @@ Consider the 101 x 3 world shown below. In the start state the agent has a choic
 
 ## Exercise 1.4 (12pt)
 ### Prompt
-Apply policy iteration, showing each step in full, to determine the optimal policy when the *initial policy* is pi(cool) = Slow and pi(warm) = fast. **Show both the policy evaluation and policy improvement steps cleary until convergence.** Assuming a discount factor of 0.5.
+Apply policy iteration, showing each step in full, to determine the optimal policy when the *initial policy* is pi(cool) = Slow and π(warm) = fast. **Show both the policy evaluation and policy improvement steps cleary until convergence.** Assuming a discount factor of 0.5.
 
 
 ### Reponse
