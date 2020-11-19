@@ -48,6 +48,8 @@ Apply policy iteration, showing each step in full, to determine the optimal poli
 ### Prompt
 <<Inser Figure>
 Consider the car domain above (without knowing the T or R) and given the following experiences:  
+  
+|    |    |    |    |  
 |----|----|----|----|
 |Episode 1|
 |cool|slow|cool|+1|
@@ -66,6 +68,6 @@ Consider the car domain above (without knowing the T or R) and given the followi
 |warm|fast|overheated|-10|
 
 A. (2pt) Estimating the parameters for T and R for model-based reinforcement learning.  
-B. (2pt) Use MC reinforcement learning method (direct evaluation) to estimate the V function, assuming $\gamma=1.0.  
-C. (4pt) Assuming that the initial state values are allk zeros, compute the updates *in TD learning for policy evaluation (passive RL)* to the state values after running through episode 1 and 2 in sequence. Show steps for $\alpha = 0.5 and $\gamma = 1.0.  
-D. (4pt) Assumning that the initial Q values are all zeros, compute the updates *in Q learning (active RL) to the Q values after running through episode 1 and 2 in sequence. Show steps for $\alpha=0.5 and $\gamma=1.0. 
+B. (2pt) Use MC reinforcement learning method (direct evaluation) to estimate the V function, assuming γ=1.0.  
+C. (4pt) Assuming that the initial state values are allk zeros, compute the updates *in TD learning for policy evaluation (passive RL)* to the state values after running through episode 1 and 2 in sequence. Show steps for α=0.5 and γ=1.0.  
+D. (4pt) Assumning that the initial Q values are all zeros, compute the updates *in Q learning (active RL) to the Q values after running through episode 1 and 2 in sequence. Show steps for α=0.5 and γ=1.0. 
