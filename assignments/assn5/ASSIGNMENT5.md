@@ -10,9 +10,9 @@ The following text shall not be used for the purposes of academic dishonesty. It
 ## Exercise 1.1 (8pt)
 ### Prompt
 Sometimes MDPs are formulated with the reward function R(s,a) that depends only on the current state and action taken or with a reward function R(s) that only dpeends on the current state.  
-A. (2pt) Write the Bellman equations for these formulations *for the optimal value function.*  
-B. (3pt) Show how an MDP with reward function R(s,a,s<sup>'</sup>) can be transformed into a different MDP with a reward function R(s,a), such that optimal policies in the new MDP correspond exactly to optimal policies in the original MDP. **You must formally define the new MDP (its components) based on the old MDP.**  
-C. (3pt) Now do the same to convert MDPs with R(s,a,s') into MDPs with R(s). **You must formally define the new MDP (its components) based on the old MDP.**  
+1. (2pt) Write the Bellman equations for these formulations *for the optimal value function.*  
+2. (3pt) Show how an MDP with reward function R(s,a,s<sup>'</sup>) can be transformed into a different MDP with a reward function R(s,a), such that optimal policies in the new MDP correspond exactly to optimal policies in the original MDP. **You must formally define the new MDP (its components) based on the old MDP.**  
+3. (3pt) Now do the same to convert MDPs with R(s,a,s') into MDPs with R(s). **You must formally define the new MDP (its components) based on the old MDP.**  
 
 ### Response
 
@@ -22,10 +22,10 @@ Consider the 3 x 3 world shown below. The transition model is the same as in our
 Insert Figure Here
 
 Use discounted rewards with a discount factor of 0.99. Show the policy obtained in each case. **Explain intuitively** why the value of r leads to each policy.
-A. r = 100  
-B. r = -3  
-C. r = 0  
-D. r = +3  
+1. r = 100  
+2. r = -3  
+3. r = 0  
+4. r = +3  
 
 ### Response
 
@@ -67,7 +67,7 @@ Consider the car domain above (without knowing the T or R) and given the followi
 |warm|slow|warm|+1|
 |warm|fast|overheated|-10|
 
-A. (2pt) Estimating the parameters for T and R for model-based reinforcement learning.  
-B. (2pt) Use MC reinforcement learning method (direct evaluation) to estimate the V function, assuming γ=1.0.  
-C. (4pt) Assuming that the initial state values are allk zeros, compute the updates *in TD learning for policy evaluation (passive RL)* to the state values after running through episode 1 and 2 in sequence. Show steps for α=0.5 and γ=1.0.  
-D. (4pt) Assumning that the initial Q values are all zeros, compute the updates *in Q learning (active RL) to the Q values after running through episode 1 and 2 in sequence. Show steps for α=0.5 and γ=1.0. 
+1. (2pt) Estimating the parameters for T and R for model-based reinforcement learning.  
+2. (2pt) Use MC reinforcement learning method (direct evaluation) to estimate the V function, assuming γ=1.0.  
+3. (4pt) Assuming that the initial state values are allk zeros, compute the updates *in TD learning for policy evaluation (passive RL)* to the state values after running through episode 1 and 2 in sequence. Show steps for α=0.5 and γ=1.0.  
+4. (4pt) Assumning that the initial Q values are all zeros, compute the updates *in Q learning (active RL) to the Q values after running through episode 1 and 2 in sequence. Show steps for α=0.5 and γ=1.0. 
