@@ -49,16 +49,17 @@ Apply policy iteration, showing each step in full, to determine the optimal poli
 <<Inser Figure>
 Consider the car domain above (without knowing the T or R) and given the following experiences:  
   
-|    |    |    |    |  
+|Episode 1   |    |    |    |  
 |----|----|----|----|
-|Episode 1|
 |cool|slow|cool|+1|
 |cool|slow|cool|+1|
 |cool|fast|cool|+2|
 |cool|fast|cool|+2|
 |cool|fast|warm|+2|
 |warm|fast|overheated|-10|
-|Episode 2|
+
+|Episode 2   |    |    |    |
+|----|----|----|----|
 |warm|slow|warm|+1|
 |warm|slow|cool|+1|
 |cool|slow|cool|+1|
